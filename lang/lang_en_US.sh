@@ -37,8 +37,9 @@ PIF_WARNING_MAGISK="[!] PlayIntegrityFix exists, please configure DenyList for P
 MODULE_OBSOLETE="[-] Module ID has changed, old module is obsolete."
 FONT_BLOCK_DISABLED="[-] Module updating... Font block feature disabled, please reconfigure."
 UNI_BLOCK_DISABLED="[-] Module updating... Unicode range block feature disabled, please reconfigure."
-XIAOMI_KEEP="[!] Xiaomi device detected, keeping zygisk directory."
-NON_XIAOMI_REMOVE="[✓] Non-Xiaomi device detected, removing zygisk directory."
+XIAOMI_KEEP="[!] HyperOS / MIUI detected"
+NON_XIAOMI_REMOVE="[!] HyperOS / MIUI not detected; this module targets Xiaomi devices"
+OVERLAY_HINT="[!] Also install DisableMiFontOverlay 1.0.6 separately; overlay disable is not bundled"
 
 ##### search_dirs.sh #####
 SEARCH_FONTS="[•] Starting search for system font XML files..."

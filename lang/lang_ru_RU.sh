@@ -37,8 +37,9 @@ PIF_WARNING_MAGISK="[!] Обнаружен модуль PlayIntegrityFix. Доб
 MODULE_OBSOLETE="[-] ID модуля изменён, старый модуль устарел."
 FONT_BLOCK_DISABLED="[-] Модуль обновляется... функция блокировки шрифтов отключена, пожалуйста, настройте заново."
 UNI_BLOCK_DISABLED="[-] Модуль обновляется... функция блокировки диапазона юникода отключена, пожалуйста, настройте заново."
-XIAOMI_KEEP="[!] Обнаружено устройство Xiaomi, каталог zygisk сохранен. Удалите пустой модуль шрифтов."
-NON_XIAOMI_REMOVE="[✓] Не Xiaomi-устройство, каталог zygisk удален."
+XIAOMI_KEEP="[!] Обнаружен HyperOS / MIUI"
+NON_XIAOMI_REMOVE="[!] HyperOS / MIUI не обнаружен; модуль рассчитан на Xiaomi"
+OVERLAY_HINT="[!] Также установите DisableMiFontOverlay 1.0.6 отдельно; отключение overlay не входит в этот модуль"
 
 ##### search_dirs.sh #####
 SEARCH_FONTS="[•] Начало поиска XML-файлов системных шрифтов..."

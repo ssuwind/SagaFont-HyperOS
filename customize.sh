@@ -52,12 +52,49 @@ MIUI_NAM=$(getprop ro.miui.ui.version.name)
 MIOS_NAM=$(getprop ro.mi.os.version.name)
 if [ -n "$MIUI_NAM" ] || [ -n "$MIOS_NAM" ]; then
   ui_print "$(msg XIAOMI_KEEP)"
+  ui_print "$(msg OVERLAY_HINT)"
 else
   ui_print "$(msg NON_XIAOMI_REMOVE)"
-  rm -rf "$MODPATH/zygisk"
 fi
 
-. "$MODPATH/hyperos_cover.sh"
+place_saga() {
+  src="$1"
+  dest="$2"
+  [ -f "$src" ] || return 1
+  dest_dir="$(dirname "$dest")"
+  [ -d "$dest_dir" ] || mkdir -p "$dest_dir"
+  [ "$src" = "$dest" ] && return 0
+  if ln -f "$src" "$dest" 2>/dev/null; then
+    return 0
+  fi
+  if [ -n "$SAGA_COPY_ANCHOR" ] && [ -f "$SAGA_COPY_ANCHOR" ]; then
+    ln -f "$SAGA_COPY_ANCHOR" "$dest" 2>/dev/null && return 0
+  fi
+  cp -f "$src" "$dest" || return 1
+  chmod 644 "$dest" 2>/dev/null
+  SAGA_COPY_ANCHOR="$dest"
+  return 0
+}
+
+skip_font() {
+  name="$1"
+  case "$name" in
+    *.ttc|*.TTC)
+      return 0 ;;
+    MFGA*|Plangothic*|Unicode1*|Unicode2*|Unicode3*|Braille*|Private-Use*|Unicodia*|Unknown-symbol*|ZUno*|Satisar*|Tibetan-Regular*|Archaic*|DroidSansMono*|TH-Tshyn*|P1-Regular*|P2-Regular*|P3-Regular*|SagaSans*|NotoColorEmoji*|NotoSansSymbols*)
+      return 0 ;;
+  esac
+  return 1
+}
+
+is_hyperos_ui_font() {
+  name="$1"
+  case "$name" in
+    MiSans*|MiLan*|MILan*|MiClock*|Mitype*|MiType*|MiSerif*|MiuiEx*|Miui-*|MIUI*|Roboto*|RobotoFlex*|Qinghe*|MoreClock*|LockClock*|HyperOS*|hyperos*|clock_num*|ClockNum*|MiSansC*|ClockTypeface*|ClockFont*|clock*.ttf|clock*.otf|Clock*.ttf|Clock*.otf|SysFont*|SysSans*)
+      return 0 ;;
+  esac
+  return 1
+}
 
 SAGA_MAIN="$MODPATH/system/fonts/SagaSans.ttf"
 if [ ! -f "$SAGA_MAIN" ]; then
@@ -71,9 +108,10 @@ if [ -z "$SAGA_SIZE" ] || [ "$SAGA_SIZE" -lt 102400 ]; then
 fi
 
 ui_print "- Applying SagaSans to HyperOS system UI fonts..."
-ROBOTO_EXTRA_NAMES="Roboto-Regular.ttf Roboto-Italic.ttf RobotoFlex-Regular.ttf SysFont-Regular.ttf SysSans-En-Regular.ttf Roboto-Thin.ttf Roboto-ThinItalic.ttf Roboto-Light.ttf Roboto-LightItalic.ttf Roboto-Medium.ttf Roboto-MediumItalic.ttf Roboto-Bold.ttf Roboto-BoldItalic.ttf Roboto-Black.ttf Roboto-BlackItalic.ttf RobotoCondensed-Regular.ttf RobotoCondensed-Bold.ttf RobotoCondensed-Light.ttf RobotoCondensed-Italic.ttf NotoSans-Regular.ttf NotoSans-Bold.ttf SourceSansPro-Regular.ttf GoogleSans-Regular.ttf GoogleSans-Medium.ttf GoogleSans-Bold.ttf ProductSans-Regular.ttf ProductSans-Bold.ttf"
-for f in $ROBOTO_EXTRA_NAMES; do
-  place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
+for f in SysFont-Regular.ttf SysSans-En-Regular.ttf Roboto-Regular.ttf Roboto-Italic.ttf RobotoFlex-Regular.ttf; do
+  if [ -f "$MODPATH/system/fonts/$f" ]; then
+    place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
+  fi
 done
 
 PRODUCT_FONT_SUBDIR=""
@@ -93,7 +131,7 @@ HAS_INDEP_VENDOR=0
 [ -d /system_ext/fonts ] && HAS_INDEP_SYSTEM_EXT=1
 [ -d /vendor/fonts ] && HAS_INDEP_VENDOR=1
 
-HYPEROS_FONT_NAMES="MiSans.ttf MiSans-Regular.ttf MiSansVF.ttf MiSansVF.otf MiSans_VF.ttf MiSansL3.otf MiSansLatinVF.ttf MiSansTCVF.ttf MiSansRoundedSC.ttf MiSansRoundedTC.ttf MiSansCondensed2T.ttf MiSansC.ttf MILanProVF.ttf MILanProVF-Medium.ttf MitypeVF.ttf MitypeClock.otf MitypeClockVF.ttf MitypeClockMono.otf MitypeMonoVF.ttf MiClock.ttf MiClockVF.ttf MiSerifSCVF.ttf MiSerifTCVF.ttf MiuiEx-Regular.ttf MiuiEx-Light.ttf MiuiEx-Bold.ttf MoreClock.otf Qinghe.otf ClockTypeface.otf ClockFont.ttf NotoColorEmoji.ttf NotoColorEmoji-fallback.ttf NotoColorEmojiLegacy.ttf NotoColorEmojiFlags.ttf NotoSansSymbols-Regular-Subsetted2.ttf MiSansArabic.ttf MiSansThai.ttf MiSansTibetan.ttf MiSansKhmer.ttf MiSansMyanmar.ttf MiSansLao.ttf"
+HYPEROS_FONT_NAMES="MiSans.ttf MiSans-Regular.ttf MiSansVF.ttf MiSansVF.otf MiSans_VF.ttf MiSansL3.otf MiSansLatinVF.ttf MiSansTCVF.ttf MiSansRoundedSC.ttf MiSansRoundedTC.ttf MiSansCondensed2T.ttf MiSansC.ttf MILanProVF.ttf MILanProVF-Medium.ttf MitypeVF.ttf MitypeClock.otf MitypeClockVF.ttf MitypeClockMono.otf MitypeMonoVF.ttf MiClock.ttf MiClockVF.ttf MiSerifSCVF.ttf MiSerifTCVF.ttf MiuiEx-Regular.ttf MiuiEx-Light.ttf MiuiEx-Bold.ttf MoreClock.otf Qinghe.otf ClockTypeface.otf ClockFont.ttf"
 for f in $HYPEROS_FONT_NAMES; do
   place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
   if [ -n "$PRODUCT_FONT_SUBDIR" ]; then
@@ -126,7 +164,7 @@ for dir in $FONT_SCAN_DIRS; do
   for f in "$dir"/*.ttf "$dir"/*.otf; do
     [ -f "$f" ] || continue
     name="$(basename "$f")"
-    skip_hyperos_font "$name" && continue
+    skip_font "$name" && continue
     if is_hyperos_ui_font "$name"; then
       place_saga "$SAGA_MAIN" "$MODPATH/$subdir/$name"
       ui_print "- Covered: $name"
@@ -139,7 +177,7 @@ parse_font_xml() {
   [ -f "$xml" ] || return
   grep -oE '[A-Za-z0-9_.-]+\.(ttf|otf)' "$xml" 2>/dev/null | sort -u | while IFS= read -r name; do
     name="$(basename "$name")"
-    skip_hyperos_font "$name" && continue
+    skip_font "$name" && continue
     if is_hyperos_ui_font "$name"; then
       place_saga "$SAGA_MAIN" "$MODPATH/$subdir/$name"
       ui_print "- Covered: $name"
@@ -170,12 +208,7 @@ for dir in /system/etc /system/product/etc /system/system_ext/etc /system/vendor
   parse_font_xml "$dir/fonts.xml" "$subdir"
   parse_font_xml "$dir/font_fallback.xml" "$subdir"
   parse_font_xml "$dir/fonts_fallback.xml" "$subdir"
-  parse_font_xml "$dir/fonts_customization.xml" "$subdir"
 done
-
-SAGA_BACKUP_DIR="$MODPATH/theme_backup"
-cover_hyperos_runtime "$SAGA_MAIN"
-cover_app_runtime "$SAGA_MAIN"
 
 . "$MODPATH/search_dirs.sh"
 
@@ -188,3 +221,4 @@ if command -v set_perm_recursive >/dev/null 2>&1; then
 fi
 
 ui_print "- Welcome to SagaFont for HyperOS!"
+ui_print "$(msg OVERLAY_HINT)"

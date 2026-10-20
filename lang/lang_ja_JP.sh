@@ -37,8 +37,9 @@ PIF_WARNING_MAGISK="[!] PlayIntegrityFix モジュールが検出されました
 MODULE_OBSOLETE="[-] モジュール ID が変更されました。旧モジュールは廃止されています。"
 FONT_BLOCK_DISABLED="[-] モジュール更新中...フォントブロック機能を無効化しました。再設定してください。"
 UNI_BLOCK_DISABLED="[-] モジュール更新中...フォント範囲ブロック機能を無効化しました。再設定してください。"
-XIAOMI_KEEP="[!] Xiaomi デバイスのため、zygisk ディレクトリを保持します。空のフォントモジュールを削除してください。"
-NON_XIAOMI_REMOVE="[✓] Xiaomi 以外のデバイスのため、zygisk ディレクトリを削除しました。"
+XIAOMI_KEEP="[!] HyperOS / MIUI を検出しました"
+NON_XIAOMI_REMOVE="[!] HyperOS / MIUI が検出されません。本モジュールは Xiaomi 向けです"
+OVERLAY_HINT="[!] 別モジュール DisableMiFontOverlay 1.0.6 も導入してください。overlay 無効化は同梱しません"
 
 ##### search_dirs.sh #####
 SEARCH_FONTS="[•] システムフォント XML ファイルの検索を開始します..."

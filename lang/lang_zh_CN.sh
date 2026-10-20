@@ -37,8 +37,9 @@ PIF_WARNING_MAGISK="[!] 检测到 PlayIntegrityFix 模块存在, 请单独打开
 MODULE_OBSOLETE="[-] 模块 ID 已更改，旧模块已弃用"
 FONT_BLOCK_DISABLED="[-] 模块更新中...停用字体屏蔽功能，请重新设置"
 UNI_BLOCK_DISABLED="[-] 模块更新中...停用字体区间屏蔽功能，请重新设置"
-XIAOMI_KEEP="[!] 设备为米系,所以保留zygisk目录,请删除空字体模块"
-NON_XIAOMI_REMOVE="[✓] 非米系设备,删除zygisk目录"
+XIAOMI_KEEP="[!] 已检测到 HyperOS / MIUI"
+NON_XIAOMI_REMOVE="[!] 未检测到 HyperOS / MIUI，本模块面向小米设备"
+OVERLAY_HINT="[!] 请同时安装独立模块 DisableMiFontOverlay 1.0.6，本模块不整合 overlay 禁用"
 
 ##### search_dirs.sh #####
 SEARCH_FONTS="[•] 开始搜索系统字体 XML 文件..."

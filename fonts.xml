@@ -123,15 +123,7 @@
     <alias name="sans-serif-thin" to="sans-serif" weight="100" />
     <alias name="sans-serif-light" to="sans-serif" weight="300" />
     <alias name="sans-serif-medium" to="sans-serif" weight="500" />
-    <alias name="sans-serif-black" to="sans-serif" weight="900" />
-    <alias name="roboto" to="sans-serif" />
-    <alias name="Roboto" to="sans-serif" />
-    <alias name="noto-sans" to="sans-serif" />
-    <alias name="Noto Sans" to="sans-serif" />
-    <alias name="google-sans" to="sans-serif" />
-    <alias name="Google Sans" to="sans-serif" />
-    <alias name="product-sans" to="sans-serif" />
-    <alias name="Product Sans" to="sans-serif" />
+    <alias name="sans-serif-black" to="sans-serif" weight="700" />
     <alias name="arial" to="sans-serif" />
     <alias name="helvetica" to="sans-serif" />
     <alias name="tahoma" to="sans-serif" />
@@ -185,25 +177,15 @@
 	<!-- 可变衬线字体调用 -->
     <family name="serif">
         <font weight="100" style="normal">SagaSans.ttf</font>
-        <font weight="100" style="italic">SagaSans.ttf</font>
         <font weight="200" style="normal">SagaSans.ttf</font>
-        <font weight="200" style="italic">SagaSans.ttf</font>
         <font weight="300" style="normal">SagaSans.ttf</font>
-        <font weight="300" style="italic">SagaSans.ttf</font>
         <font weight="350" style="normal">SagaSans.ttf</font>
-        <font weight="350" style="italic">SagaSans.ttf</font>
         <font weight="400" style="normal">SagaSans.ttf</font>
-        <font weight="400" style="italic">SagaSans.ttf</font>
         <font weight="500" style="normal">SagaSans.ttf</font>
-        <font weight="500" style="italic">SagaSans.ttf</font>
         <font weight="600" style="normal">SagaSans.ttf</font>
-        <font weight="600" style="italic">SagaSans.ttf</font>
         <font weight="700" style="normal">SagaSans.ttf</font>
-        <font weight="700" style="italic">SagaSans.ttf</font>
         <font weight="800" style="normal">SagaSans.ttf</font>
-        <font weight="800" style="italic">SagaSans.ttf</font>
         <font weight="900" style="normal">SagaSans.ttf</font>
-        <font weight="900" style="italic">SagaSans.ttf</font>
     </family>
     <!-- 可变衬线字体调用（终） -->
 
@@ -219,26 +201,7 @@
     
 	<!-- 可变等宽字体调用 -->
     <family name="monospace">
-        <font weight="100" style="normal">SagaSans.ttf</font>
-        <font weight="100" style="italic">SagaSans.ttf</font>
-        <font weight="200" style="normal">SagaSans.ttf</font>
-        <font weight="200" style="italic">SagaSans.ttf</font>
-        <font weight="300" style="normal">SagaSans.ttf</font>
-        <font weight="300" style="italic">SagaSans.ttf</font>
-        <font weight="350" style="normal">SagaSans.ttf</font>
-        <font weight="350" style="italic">SagaSans.ttf</font>
         <font weight="400" style="normal">SagaSans.ttf</font>
-        <font weight="400" style="italic">SagaSans.ttf</font>
-        <font weight="500" style="normal">SagaSans.ttf</font>
-        <font weight="500" style="italic">SagaSans.ttf</font>
-        <font weight="600" style="normal">SagaSans.ttf</font>
-        <font weight="600" style="italic">SagaSans.ttf</font>
-        <font weight="700" style="normal">SagaSans.ttf</font>
-        <font weight="700" style="italic">SagaSans.ttf</font>
-        <font weight="800" style="normal">SagaSans.ttf</font>
-        <font weight="800" style="italic">SagaSans.ttf</font>
-        <font weight="900" style="normal">SagaSans.ttf</font>
-        <font weight="900" style="italic">SagaSans.ttf</font>
     </family>
     <!-- 可变等宽字体调用（终） -->
 
@@ -253,105 +216,57 @@
 
     <family name="casual">
         <font weight="400" style="normal" postScriptName="SagaSans">SagaSans.ttf</font>
-        <font weight="400" style="italic" postScriptName="SagaSans">SagaSans.ttf</font>
     </family>
 
     <family name="cursive">
       <font weight="400" style="normal">SagaSans.ttf</font>
-      <font weight="400" style="italic">SagaSans.ttf</font>
       <font weight="700" style="normal">SagaSans.ttf</font>
-      <font weight="700" style="italic">SagaSans.ttf</font>
     </family>
 
     <family name="sans-serif-smallcaps">
         <font weight="400" style="normal" postScriptName="SagaSans">SagaSans.ttf</font>
-        <font weight="400" style="italic" postScriptName="SagaSans">SagaSans.ttf</font>
     </family>
 
     <!--  MIUI / HyperOS MOD: Font_VariableFont  -->
+    <!-- DisableMiFontOverlay 关闭小米字体 overlay 后，这些别名走 sans-serif / SagaSans -->
 
-    <!-- MIUI / HyperOS fonts begin /-->
-    <family name="miui">
-        <font weight="100" style="normal">SagaSans.ttf</font>
-        <font weight="200" style="normal">SagaSans.ttf</font>
-        <font weight="300" style="normal">SagaSans.ttf</font>
-        <font weight="350" style="normal">SagaSans.ttf</font>
-        <font weight="400" style="normal">SagaSans.ttf</font>
-        <font weight="500" style="normal">SagaSans.ttf</font>
-        <font weight="600" style="normal">SagaSans.ttf</font>
-        <font weight="700" style="normal">SagaSans.ttf</font>
-        <font weight="800" style="normal">SagaSans.ttf</font>
-        <font weight="900" style="normal">SagaSans.ttf</font>
-    </family>
-    <alias name="miui-thin" to="miui" weight="100" />
-    <alias name="miui-light" to="miui" weight="200" />
-    <alias name="miui-regular" to="miui" weight="400" />
-    <alias name="miui-medium" to="miui" weight="500" />
-    <alias name="miui-bold" to="miui" weight="700" />
+    <!-- MIUI fonts begin /-->
+    <alias name="miui" to="sans-serif" weight="400" />
+    <alias name="miui-thin" to="sans-serif" weight="100" />
+    <alias name="miui-light" to="sans-serif" weight="200" />
+    <alias name="miui-regular" to="sans-serif" weight="400" />
+    <alias name="miui-medium" to="sans-serif" weight="500" />
+    <alias name="miui-bold" to="sans-serif" weight="700" />
 
-    <family name="mipro">
-        <font weight="100" style="normal">SagaSans.ttf</font>
-        <font weight="200" style="normal">SagaSans.ttf</font>
-        <font weight="300" style="normal">SagaSans.ttf</font>
-        <font weight="350" style="normal">SagaSans.ttf</font>
-        <font weight="400" style="normal">SagaSans.ttf</font>
-        <font weight="500" style="normal">SagaSans.ttf</font>
-        <font weight="600" style="normal">SagaSans.ttf</font>
-        <font weight="700" style="normal">SagaSans.ttf</font>
-        <font weight="800" style="normal">SagaSans.ttf</font>
-        <font weight="900" style="normal">SagaSans.ttf</font>
-    </family>
-    <alias name="mipro-thin" to="mipro" weight="100" />
-    <alias name="mipro-extralight" to="mipro" weight="200" />
-    <alias name="mipro-light" to="mipro" weight="300" />
-    <alias name="mipro-normal" to="mipro" weight="350" />
-    <alias name="mipro-regular" to="mipro" weight="400" />
-    <alias name="mipro-medium" to="mipro" weight="500" />
-    <alias name="mipro-demibold" to="mipro" weight="600" />
-    <alias name="mipro-semibold" to="mipro" weight="700" />
-    <alias name="mipro-bold" to="mipro" weight="800" />
-    <alias name="mipro-heavy" to="mipro" weight="900" />
+    <alias name="mipro" to="sans-serif" weight="400" />
+    <alias name="mipro-thin" to="sans-serif" weight="100" />
+    <alias name="mipro-extralight" to="sans-serif" weight="200" />
+    <alias name="mipro-light" to="sans-serif" weight="300" />
+    <alias name="mipro-normal" to="sans-serif" weight="350" />
+    <alias name="mipro-regular" to="sans-serif" weight="400" />
+    <alias name="mipro-medium" to="sans-serif" weight="500" />
+    <alias name="mipro-demibold" to="sans-serif" weight="600" />
+    <alias name="mipro-semibold" to="sans-serif" weight="700" />
+    <alias name="mipro-bold" to="sans-serif" weight="800" />
+    <alias name="mipro-heavy" to="sans-serif" weight="900" />
 
-    <family name="misans">
-        <font weight="100" style="normal">SagaSans.ttf</font>
-        <font weight="200" style="normal">SagaSans.ttf</font>
-        <font weight="300" style="normal">SagaSans.ttf</font>
-        <font weight="350" style="normal">SagaSans.ttf</font>
-        <font weight="400" style="normal">SagaSans.ttf</font>
-        <font weight="500" style="normal">SagaSans.ttf</font>
-        <font weight="600" style="normal">SagaSans.ttf</font>
-        <font weight="700" style="normal">SagaSans.ttf</font>
-        <font weight="800" style="normal">SagaSans.ttf</font>
-        <font weight="900" style="normal">SagaSans.ttf</font>
-    </family>
-    <alias name="misans-thin" to="misans" weight="100" />
-    <alias name="misans-extralight" to="misans" weight="200" />
-    <alias name="misans-light" to="misans" weight="300" />
-    <alias name="misans-normal" to="misans" weight="350" />
-    <alias name="misans-regular" to="misans" weight="400" />
-    <alias name="misans-medium" to="misans" weight="500" />
-    <alias name="misans-demibold" to="misans" weight="600" />
-    <alias name="misans-semibold" to="misans" weight="700" />
-    <alias name="misans-bold" to="misans" weight="800" />
-    <alias name="misans-heavy" to="misans" weight="900" />
-    <alias name="misansvf" to="misans" weight="400" />
-    <alias name="MiSans" to="misans" weight="400" />
-    <alias name="MiSansVF" to="misans" weight="400" />
-
-    <family name="clock">
-        <font weight="100" style="normal">SagaSans.ttf</font>
-        <font weight="400" style="normal">SagaSans.ttf</font>
-        <font weight="700" style="normal">SagaSans.ttf</font>
-        <font weight="900" style="normal">SagaSans.ttf</font>
-    </family>
-    <alias name="miclock" to="clock" weight="400" />
-
-    <family name="mitype">
-        <font weight="100" style="normal">SagaSans.ttf</font>
-        <font weight="400" style="normal">SagaSans.ttf</font>
-        <font weight="700" style="normal">SagaSans.ttf</font>
-        <font weight="900" style="normal">SagaSans.ttf</font>
-    </family>
+    <alias name="misans" to="sans-serif" weight="400" />
+    <alias name="misans-thin" to="sans-serif" weight="100" />
+    <alias name="misans-extralight" to="sans-serif" weight="200" />
+    <alias name="misans-light" to="sans-serif" weight="300" />
+    <alias name="misans-normal" to="sans-serif" weight="350" />
+    <alias name="misans-regular" to="sans-serif" weight="400" />
+    <alias name="misans-medium" to="sans-serif" weight="500" />
+    <alias name="misans-demibold" to="sans-serif" weight="600" />
+    <alias name="misans-semibold" to="sans-serif" weight="700" />
+    <alias name="misans-bold" to="sans-serif" weight="800" />
+    <alias name="misans-heavy" to="sans-serif" weight="900" />
+    <alias name="misansvf" to="sans-serif" weight="400" />
+    <alias name="MiSans" to="sans-serif" weight="400" />
+    <alias name="MiSansVF" to="sans-serif" weight="400" />
+    <alias name="miclock" to="sans-serif" weight="400" />
+    <alias name="clock" to="sans-serif" weight="400" />
+    <alias name="mitype" to="sans-serif" weight="400" />
     <alias name="miserif" to="serif" weight="400" />
     <alias name="milanpro" to="sans-serif" weight="400" />
     <alias name="milan" to="sans-serif" weight="400" />
@@ -1629,16 +1544,16 @@
     
     <!-- Emoji文件自定义 -->
     <family lang="und-Zsye" ignore="true">
-        <font weight="400" style="normal">SagaSans.ttf</font>
+        <font weight="400" style="normal">NotoColorEmojiLegacy.ttf</font>
     </family>
     <family lang="und-Zsye">
-        <font weight="400" style="normal">SagaSans.ttf</font>
+        <font weight="400" style="normal">NotoColorEmoji.ttf</font>
     </family>
     <family lang="und-Zsye">
-        <font weight="400" style="normal">SagaSans.ttf</font>
+        <font weight="400" style="normal">NotoColorEmojiFlags.ttf</font>
     </family>
     <family lang="und-Zsym">
-        <font weight="400" style="normal">SagaSans.ttf</font>
+        <font weight="400" style="normal">NotoSansSymbols-Regular-Subsetted2.ttf</font>
     </family>
     <!-- Emoji文件自定义（终） -->
     

@@ -98,6 +98,13 @@ search_and_copy() {
   done
 }
 
+HAS_INDEP_PRODUCT=0
+HAS_INDEP_SYSTEM_EXT=0
+HAS_INDEP_VENDOR=0
+[ -d /product/etc ] && HAS_INDEP_PRODUCT=1
+[ -d /system_ext/etc ] && HAS_INDEP_SYSTEM_EXT=1
+[ -d /vendor/etc ] && HAS_INDEP_VENDOR=1
+
 if [ -f /system/etc/fonts.xml ]; then
   mkdir -p "$MODPATH/system/etc"
   cp -f "$SRC_FONT_XML" "$MODPATH/system/etc/fonts.xml"
@@ -107,13 +114,26 @@ if [ -f /system/etc/font_fallback.xml ]; then
   cp -f "$SRC_FONT_XML" "$MODPATH/system/etc/font_fallback.xml"
 fi
 
-search_and_copy "/system/system_ext/etc" "system/system_ext/etc"
-search_and_copy "/system_ext/etc" "system_ext/etc"
-search_and_copy "/system/product/etc" "system/product/etc"
-search_and_copy "/product/etc" "product/etc"
+if [ "$HAS_INDEP_SYSTEM_EXT" -eq 1 ]; then
+  search_and_copy "/system_ext/etc" "system_ext/etc"
+else
+  search_and_copy "/system/system_ext/etc" "system/system_ext/etc"
+fi
+
+if [ "$HAS_INDEP_PRODUCT" -eq 1 ]; then
+  search_and_copy "/product/etc" "product/etc"
+else
+  search_and_copy "/system/product/etc" "system/product/etc"
+fi
+
 search_and_copy "/system/etc" "system/etc"
-search_and_copy "/system/vendor/etc" "system/vendor/etc"
-search_and_copy "/vendor/etc" "vendor/etc"
+
+if [ "$HAS_INDEP_VENDOR" -eq 1 ]; then
+  search_and_copy "/vendor/etc" "vendor/etc"
+else
+  search_and_copy "/system/vendor/etc" "system/vendor/etc"
+fi
+
 search_and_copy "/mi_ext/etc" "mi_ext/etc"
 search_and_copy "/odm/etc" "odm/etc"
 
