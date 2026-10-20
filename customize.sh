@@ -81,7 +81,7 @@ skip_font() {
   case "$name" in
     *.ttc|*.TTC)
       return 0 ;;
-    MFGA*|Plangothic*|Unicode1*|Unicode2*|Unicode3*|Braille*|Private-Use*|Unicodia*|Unknown-symbol*|ZUno*|Satisar*|Tibetan-Regular*|Archaic*|DroidSansMono*|TH-Tshyn*|P1-Regular*|P2-Regular*|P3-Regular*|SagaSans*|NotoColorEmoji*|NotoSansSymbols*)
+    MFGA*|Plangothic*|Unicode1*|Unicode2*|Unicode3*|Braille*|Private-Use*|Unicodia*|Unknown-symbol*|ZUno*|Satisar*|Tibetan-Regular*|Archaic*|DroidSansMono*|TH-Tshyn*|P1-Regular*|P2-Regular*|P3-Regular*|SagaSans*)
       return 0 ;;
   esac
   return 1
@@ -90,7 +90,7 @@ skip_font() {
 is_hyperos_ui_font() {
   name="$1"
   case "$name" in
-    MiSans*|MiLan*|MILan*|MiClock*|Mitype*|MiType*|MiSerif*|MiuiEx*|Miui-*|MIUI*|Roboto*|RobotoFlex*|Qinghe*|MoreClock*|LockClock*|HyperOS*|hyperos*|clock_num*|ClockNum*|MiSansC*|ClockTypeface*|ClockFont*|clock*.ttf|clock*.otf|Clock*.ttf|Clock*.otf|SysFont*|SysSans*)
+    MiSans*|MiLan*|MILan*|MiClock*|Mitype*|MiType*|MiSerif*|MiuiEx*|Miui-*|MIUI*|Roboto*|RobotoFlex*|Qinghe*|MoreClock*|LockClock*|HyperOS*|hyperos*|clock_num*|ClockNum*|MiSansC*|ClockTypeface*|ClockFont*|clock*.ttf|clock*.otf|Clock*.ttf|Clock*.otf|SysFont*|SysSans*|*Emoji*|NotoColorEmoji*|NotoSansSymbols*)
       return 0 ;;
   esac
   return 1
@@ -108,10 +108,9 @@ if [ -z "$SAGA_SIZE" ] || [ "$SAGA_SIZE" -lt 102400 ]; then
 fi
 
 ui_print "- Applying SagaSans to HyperOS system UI fonts..."
-for f in SysFont-Regular.ttf SysSans-En-Regular.ttf Roboto-Regular.ttf Roboto-Italic.ttf RobotoFlex-Regular.ttf; do
-  if [ -f "$MODPATH/system/fonts/$f" ]; then
-    place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
-  fi
+ROBOTO_EXTRA_NAMES="SysFont-Regular.ttf SysSans-En-Regular.ttf Roboto-Regular.ttf Roboto-Italic.ttf RobotoFlex-Regular.ttf Roboto-Thin.ttf Roboto-ThinItalic.ttf Roboto-Light.ttf Roboto-LightItalic.ttf Roboto-Medium.ttf Roboto-MediumItalic.ttf Roboto-Bold.ttf Roboto-BoldItalic.ttf Roboto-Black.ttf Roboto-BlackItalic.ttf RobotoCondensed-Regular.ttf RobotoCondensed-Bold.ttf RobotoCondensed-Light.ttf RobotoCondensed-Italic.ttf NotoSans-Regular.ttf NotoSans-Bold.ttf SourceSansPro-Regular.ttf GoogleSans-Regular.ttf GoogleSans-Medium.ttf GoogleSans-Bold.ttf ProductSans-Regular.ttf ProductSans-Bold.ttf"
+for f in $ROBOTO_EXTRA_NAMES; do
+  place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
 done
 
 PRODUCT_FONT_SUBDIR=""
@@ -131,7 +130,7 @@ HAS_INDEP_VENDOR=0
 [ -d /system_ext/fonts ] && HAS_INDEP_SYSTEM_EXT=1
 [ -d /vendor/fonts ] && HAS_INDEP_VENDOR=1
 
-HYPEROS_FONT_NAMES="MiSans.ttf MiSans-Regular.ttf MiSansVF.ttf MiSansVF.otf MiSans_VF.ttf MiSansL3.otf MiSansLatinVF.ttf MiSansTCVF.ttf MiSansRoundedSC.ttf MiSansRoundedTC.ttf MiSansCondensed2T.ttf MiSansC.ttf MILanProVF.ttf MILanProVF-Medium.ttf MitypeVF.ttf MitypeClock.otf MitypeClockVF.ttf MitypeClockMono.otf MitypeMonoVF.ttf MiClock.ttf MiClockVF.ttf MiSerifSCVF.ttf MiSerifTCVF.ttf MiuiEx-Regular.ttf MiuiEx-Light.ttf MiuiEx-Bold.ttf MoreClock.otf Qinghe.otf ClockTypeface.otf ClockFont.ttf"
+HYPEROS_FONT_NAMES="MiSans.ttf MiSans-Regular.ttf MiSansVF.ttf MiSansVF.otf MiSans_VF.ttf MiSansL3.otf MiSansLatinVF.ttf MiSansTCVF.ttf MiSansRoundedSC.ttf MiSansRoundedTC.ttf MiSansCondensed2T.ttf MiSansC.ttf MILanProVF.ttf MILanProVF-Medium.ttf MitypeVF.ttf MitypeClock.otf MitypeClockVF.ttf MitypeClockMono.otf MitypeMonoVF.ttf MiClock.ttf MiClockVF.ttf MiSerifSCVF.ttf MiSerifTCVF.ttf MiuiEx-Regular.ttf MiuiEx-Light.ttf MiuiEx-Bold.ttf MoreClock.otf Qinghe.otf ClockTypeface.otf ClockFont.ttf NotoColorEmoji.ttf NotoColorEmoji-fallback.ttf NotoColorEmojiLegacy.ttf NotoColorEmojiFlags.ttf NotoSansSymbols-Regular-Subsetted2.ttf MiSansArabic.ttf MiSansThai.ttf MiSansTibetan.ttf MiSansKhmer.ttf MiSansMyanmar.ttf MiSansLao.ttf"
 for f in $HYPEROS_FONT_NAMES; do
   place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
   if [ -n "$PRODUCT_FONT_SUBDIR" ]; then
@@ -209,6 +208,11 @@ for dir in /system/etc /system/product/etc /system/system_ext/etc /system/vendor
   parse_font_xml "$dir/font_fallback.xml" "$subdir"
   parse_font_xml "$dir/fonts_fallback.xml" "$subdir"
 done
+
+. "$MODPATH/hyperos_cover.sh"
+SAGA_BACKUP_DIR="$MODPATH/theme_backup"
+cover_theme_runtime "$SAGA_MAIN"
+cover_app_runtime "$SAGA_MAIN"
 
 . "$MODPATH/search_dirs.sh"
 

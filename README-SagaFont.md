@@ -29,11 +29,12 @@
 
 1. 刷入 `DisableMiFontOverlay_v1.0.6.zip`：Zygisk 关闭 `HAS_MIUI_VAR_FONT` / `MIUI_OPTIMIZE_ENABLED`，系统改走标准 `fonts.xml`。
 2. 刷入本模块：把 sans-serif / miui / mipro / misans 等族和 HyperOS 直载的 `MiSans*` / `Roboto*` 换成 `SagaSans.ttf`。
-3. 重启。
+3. 重启。开机后会再覆盖主题目录、GMS `/data/fonts` 与常见 App 私有字体。
 
 ## 修改说明
 
 - `fonts.xml`：沿用 1.0.4 主族全部引用 `SagaSans.ttf`；为 HyperOS 补齐 `miui` / `mipro` / `misans` / `clock` / `mitype` 别名，指向 sans-serif。安装时挂到 `system/etc` 与独立 `product/etc` 的 `fonts.xml` / `font_fallback.xml`。
-- `customize.sh`：在 1.0.4 基础上扫描 system / product / system_ext / vendor / mi_ext / odm，将 HyperOS 系统 UI 直载的 `MiSans*` / `MiLan*` / `MiClock*` / `Mitype*` / `MiSerif*` / `MiuiEx*` / `Roboto*` 硬链接为沙加体。`.ttc` 与 emoji 补字不替换。本模块不含 Zygisk overlay 禁用。
+- `customize.sh`：在 1.0.4 基础上扫描 system / product / system_ext / vendor / mi_ext / odm，将 HyperOS 系统 UI 直载的 `MiSans*` / `MiLan*` / `MiClock*` / `Mitype*` / `MiSerif*` / `MiuiEx*` / `Roboto*`，以及 emoji 与多语言补字硬链接为沙加体。`.ttc` 不替换。本模块不含 Zygisk overlay 禁用。
+- `hyperos_cover.sh` + `post-fs-data.sh` / `service.sh`：开机早期覆盖主题字体；开机完成后硬链接覆盖 GMS `/data/fonts` 与各 App `files/fonts`。已装 Play Integrity Fix 时不自动禁用 GMS FontsProvider。图标字体不替换。
 - `fonts_list.yaml`：沿用 1.0.4 黑白名单。
 - `module.prop`：更新为 HyperOS 字体模块，并注明需配合 DisableMiFontOverlay 1.0.6。
