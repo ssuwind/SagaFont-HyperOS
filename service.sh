@@ -16,8 +16,10 @@ if [ -f "$MODDIR/hyperos_cover.sh" ]; then
     SAGA_BACKUP_DIR="$MODDIR/theme_backup"
     disable_hyperos_font_overlay
     cover_hyperos_runtime "$SAGA_MAIN"
-    sleep 8
+    cover_app_runtime "$SAGA_MAIN"
+    sleep 12
     cover_hyperos_runtime "$SAGA_MAIN"
+    cover_app_runtime "$SAGA_MAIN"
   fi
 fi
 

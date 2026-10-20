@@ -29,6 +29,6 @@
 - `fonts.xml`：主字体族（sans-serif、serif、默认 fallback、lang="zh"/zh-Hans/zh-Hant/ja/ko）全部引用 `SagaSans.ttf`；HyperOS/MIUI 的 `miui`/`mipro`/`misans`/`clock`/`mitype` 作为独立 family 指向沙加体。安装时会把该 XML 挂到 `system/etc` 与 `product/etc` 的 `fonts.xml`/`font_fallback.xml`。`monospace`/`serif-monospace`、`source-sans-pro`、`casual`/`cursive`/`sans-serif-smallcaps` 等英文/数字字体族沿用 1.0.4 全局统一为 `SagaSans.ttf`。
 - `customize.sh`：安装时扫描 system、独立 product/system_ext/vendor/mi_ext/odm 字体目录，将 HyperOS 系统 UI 直接加载的 `MiSans*`/`MiLan*`/`MiClock*`/`Mitype*`/`MiSerif*`/`MiuiEx*`/`Roboto*`，以及 emoji（`NotoColorEmoji*`）与多语言补字（`MiSansArabic*` 等）替换为沙加体硬链接。`.ttc` 仍跳过。独立分区文件会放到 Magisk/KSU 对应的 `product/`、`system_ext/` 等 overlay 路径。
 - `system/etc/hosts`：沿用 SagaFont 1.0.4 原始 hosts。
-- `hyperos_cover.sh` + `post-fs-data.sh`/`service.sh`：开机后覆盖 `/data/system/theme*` 主题字体，并尝试关闭主题字体 overlay，处理锁屏时钟、控制中心等通过主题目录直载字体的场景。
+- `hyperos_cover.sh` + `post-fs-data.sh`/`service.sh`：开机早期只覆盖主题字体；开机完成后硬链接覆盖 GMS `/data/fonts` 与各 App `files/fonts` 等目录。已装 Play Integrity Fix 时不自动禁用 GMS FontsProvider。图标字体与 `.ttc` 不替换。
 - `fonts_list.yaml`：保留系统字体 XML 黑白名单，维持 HyperOS 字体配置兼容。
 - `module.prop`：更新模块名/描述为 HyperOS 适配。

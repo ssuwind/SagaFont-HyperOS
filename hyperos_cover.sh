@@ -43,6 +43,17 @@ cover_one() {
   restorecon -F "$dest" 2>/dev/null
 }
 
+cover_existing() {
+  src="$1"
+  dest="$2"
+  [ -f "$src" ] || return
+  [ -f "$dest" ] || return
+  src_size=$(wc -c < "$src" 2>/dev/null | tr -d ' ')
+  dest_size=$(wc -c < "$dest" 2>/dev/null | tr -d ' ')
+  [ -n "$src_size" ] && [ "$src_size" = "$dest_size" ] && return
+  place_saga "$src" "$dest"
+}
+
 skip_hyperos_font() {
   name="$1"
   case "$name" in
@@ -61,6 +72,89 @@ is_hyperos_ui_font() {
       return 0 ;;
   esac
   return 1
+}
+
+is_icon_font() {
+  name="$1"
+  case "$name" in
+    *icon*|*Icon*|*ICON*|FontAwesome*|MaterialIcons*|IcoMoon*|icomoon*|remixicon*|glyph*|Glyph*|symbol-font*|SymbolFont*|feather*|Feather*)
+      return 0 ;;
+  esac
+  return 1
+}
+
+cover_app_font_dir() {
+  src="$1"
+  dir="$2"
+  [ -d "$dir" ] || return
+  for f in "$dir"/*.ttf "$dir"/*.otf "$dir"/*.TTF "$dir"/*.OTF "$dir"/*/*.ttf "$dir"/*/*.otf "$dir"/*/*.TTF "$dir"/*/*.OTF; do
+    [ -f "$f" ] || continue
+    name="$(basename "$f")"
+    skip_hyperos_font "$name" && continue
+    is_icon_font "$name" && continue
+    cover_existing "$src" "$f"
+  done
+}
+
+cover_gms_font_files() {
+  src="$1"
+  [ -d /data/fonts ] || return
+  for f in /data/fonts/*.ttf /data/fonts/*.otf /data/fonts/*/*.ttf /data/fonts/*/*.otf /data/fonts/*/*/*.ttf /data/fonts/*/*/*.otf; do
+    [ -f "$f" ] || continue
+    name="$(basename "$f")"
+    skip_hyperos_font "$name" && continue
+    is_icon_font "$name" && continue
+    cover_existing "$src" "$f"
+  done
+}
+
+block_gms_provider() {
+  [ -d /data/adb/modules/playintegrityfix ] && return
+  command -v pm >/dev/null 2>&1 || return
+  UPS=$(ls -d /data/user/* 2>/dev/null)
+  for UP in $UPS; do
+    uid="${UP##*/}"
+    pm disable --user "$uid" "com.google.android.gms/com.google.android.gms.fonts.update.UpdateSchedulerService" >/dev/null 2>&1
+    pm disable --user "$uid" "com.google.android.gms/com.google.android.gms.fonts.provider.FontsProvider" >/dev/null 2>&1
+  done
+}
+
+cover_app_runtime() {
+  src="$1"
+  [ -f "$src" ] || return
+  cover_gms_font_files "$src"
+  block_gms_provider
+
+  for user_dir in /data/user/*; do
+    [ -d "$user_dir" ] || continue
+    for pkg_dir in "$user_dir"/*; do
+      [ -d "$pkg_dir" ] || continue
+      for sub in files/fonts files/font files/typeface files/truetype_fonts cache/fonts cache/font files/MIUI/theme/fonts files/fonts_cache files/publicFont files/public_font; do
+        cover_app_font_dir "$src" "$pkg_dir/$sub"
+      done
+    done
+  done
+
+  for extra in \
+    /data/data/com.tencent.mm/files/fonts \
+    /data/data/com.tencent.mobileqq/files/fonts \
+    /data/data/com.eg.android.AlipayGphone/files/fonts \
+    /data/data/com.taobao.taobao/files/fonts \
+    /data/data/com.ss.android.ugc.aweme/files/fonts \
+    /data/data/tv.danmaku.bili/files/fonts \
+    /data/data/com.sina.weibo/files/fonts \
+    /data/data/com.xunmeng.pinduoduo/files/fonts \
+    /data/data/com.smile.gifmaker/files/fonts \
+    /data/data/com.android.chrome/app_chrome/fonts \
+    /data/data/com.google.android.gms/files/fonts \
+    /data/data/com.google.android.webview/app_webview/fonts \
+    /data/data/com.android.webview/app_webview/fonts \
+    /data/data/com.google.android.inputmethod.latin/files/fonts \
+    /data/data/com.baidu.input/files/fonts \
+    /data/data/com.sohu.inputmethod.sogou/files/fonts
+  do
+    cover_app_font_dir "$src" "$extra"
+  done
 }
 
 cover_theme_dir() {

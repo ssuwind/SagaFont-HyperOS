@@ -71,10 +71,9 @@ if [ -z "$SAGA_SIZE" ] || [ "$SAGA_SIZE" -lt 102400 ]; then
 fi
 
 ui_print "- Applying SagaSans to HyperOS system UI fonts..."
-for f in Roboto-Regular.ttf Roboto-Italic.ttf RobotoFlex-Regular.ttf SysFont-Regular.ttf SysSans-En-Regular.ttf; do
-  if [ -f "$MODPATH/system/fonts/$f" ]; then
-    place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
-  fi
+ROBOTO_EXTRA_NAMES="Roboto-Regular.ttf Roboto-Italic.ttf RobotoFlex-Regular.ttf SysFont-Regular.ttf SysSans-En-Regular.ttf Roboto-Thin.ttf Roboto-ThinItalic.ttf Roboto-Light.ttf Roboto-LightItalic.ttf Roboto-Medium.ttf Roboto-MediumItalic.ttf Roboto-Bold.ttf Roboto-BoldItalic.ttf Roboto-Black.ttf Roboto-BlackItalic.ttf RobotoCondensed-Regular.ttf RobotoCondensed-Bold.ttf RobotoCondensed-Light.ttf RobotoCondensed-Italic.ttf NotoSans-Regular.ttf NotoSans-Bold.ttf SourceSansPro-Regular.ttf GoogleSans-Regular.ttf GoogleSans-Medium.ttf GoogleSans-Bold.ttf ProductSans-Regular.ttf ProductSans-Bold.ttf"
+for f in $ROBOTO_EXTRA_NAMES; do
+  place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
 done
 
 PRODUCT_FONT_SUBDIR=""
@@ -176,6 +175,7 @@ done
 
 SAGA_BACKUP_DIR="$MODPATH/theme_backup"
 cover_hyperos_runtime "$SAGA_MAIN"
+cover_app_runtime "$SAGA_MAIN"
 
 . "$MODPATH/search_dirs.sh"
 
