@@ -1,21 +1,18 @@
 # SagaFont - HyperOS 全局沙加体字体模块
 
-基于 [MFGA (MakeFontsGreatAgain)](https://github.com/Numbersf/MakeFontsGreatAgain) 与 SagaFont 1.0.4 修改的全局字体模块。配合独立模块 [DisableMiFontOverlay 1.0.6](https://github.com/YuKongA/DisableMiFontOverlay/releases/tag/v1.0.6) 使用，将 HyperOS / MIUI 中英文等字体统一显示为「沙加体」。
+基于 [MFGA (MakeFontsGreatAgain)](https://github.com/Numbersf/MakeFontsGreatAgain) 模板，将主字体替换为沙加体。配合独立模块 [DisableMiFontOverlay 1.0.6](https://github.com/YuKongA/DisableMiFontOverlay/releases/tag/v1.0.6) 使用，将 HyperOS / MIUI 中英文等字体统一显示为「沙加体」。
 
 两个模块分开安装，互不整合。本仓库只改字体模块，不修改 DisableMiFontOverlay。
 
-## 需要你做的：放置沙加体字体文件
+## 字体文件
 
-1. 将你的沙加体字体文件（单文件，含中英文全字重）重命名为：
-    ```
-    SagaSans.ttf
-    ```
-2. 放入本模块目录：
-    ```
-    system/fonts/SagaSans.ttf
-    ```
+主字体位于：
 
-放置完成后即可打包刷入。
+```
+system/fonts/SagaSans.ttf
+```
+
+安装时会硬链接为 MFGA 主字形 `100.ttf`–`900.ttf`，以及 HyperOS 常见的 `MiSans*` / `Roboto*` 文件名。`fonts.xml` 的 sans-serif / serif / 中日韩回退直接引用 `SagaSans.ttf`。
 
 ## 使用前检查（重要）
 
@@ -28,13 +25,12 @@
 ## 两个模块怎么配合
 
 1. 刷入 `DisableMiFontOverlay_v1.0.6.zip`：Zygisk 关闭 `HAS_MIUI_VAR_FONT` / `MIUI_OPTIMIZE_ENABLED`，系统改走标准 `fonts.xml`。
-2. 刷入本模块：把 sans-serif / miui / mipro / misans 等族和 HyperOS 直载的 `MiSans*` / `Roboto*` 换成 `SagaSans.ttf`。
-3. 重启。开机后会再覆盖主题目录、GMS `/data/fonts` 与常见 App 私有字体。
+2. 刷入本模块：按 MFGA 模板把主字形换成 `SagaSans.ttf`，并为 HyperOS 补齐 `miui` / `mipro` / `misans` 等别名。
+3. 重启。
 
 ## 修改说明
 
-- `fonts.xml`：沿用 1.0.4 主族全部引用 `SagaSans.ttf`；为 HyperOS 补齐 `miui` / `mipro` / `misans` / `clock` / `mitype` 别名，指向 sans-serif。安装时挂到 `system/etc` 与独立 `product/etc` 的 `fonts.xml` / `font_fallback.xml`。
-- `customize.sh`：在 1.0.4 基础上扫描 system / product / system_ext / vendor / mi_ext / odm，将 HyperOS 系统 UI 直载的 `MiSans*` / `MiLan*` / `MiClock*` / `Mitype*` / `MiSerif*` / `MiuiEx*` / `Roboto*`，以及 emoji 与多语言补字硬链接为沙加体。`.ttc` 不替换。本模块不含 Zygisk overlay 禁用。
-- `hyperos_cover.sh` + `post-fs-data.sh` / `service.sh`：开机早期覆盖主题字体；开机完成后硬链接覆盖 GMS `/data/fonts` 与各 App `files/fonts`。已装 Play Integrity Fix 时不自动禁用 GMS FontsProvider。图标字体不替换。
-- `fonts_list.yaml`：沿用 1.0.4 黑白名单。
-- `module.prop`：更新为 HyperOS 字体模块，并注明需配合 DisableMiFontOverlay 1.0.6。
+- `fonts.xml`：以 MFGA 为模板。sans-serif / serif / 中日韩回退改为 `SagaSans.ttf`。为 HyperOS 补齐 `miui` / `mipro` / `misans` / `clock` / `mitype` 别名。
+- `customize.sh`：在 MFGA 安装流程上要求存在 `SagaSans.ttf`，硬链接为 `100.ttf`–`900.ttf` 与常见 HyperOS UI 字体文件名。不扫描分区，不覆盖主题 / GMS / App 运行时字体。
+- `search_dirs.sh`：保留独立 `product` / `system_ext` / `vendor` / `mi_ext` / `odm` 分区的 `fonts.xml` 挂载，供 HyperOS 使用。
+- `module.prop`：HyperOS 字体模块，需配合 DisableMiFontOverlay 1.0.6。
