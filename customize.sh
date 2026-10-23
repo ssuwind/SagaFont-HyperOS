@@ -88,7 +88,7 @@ for w in 100 200 300 400 500 600 700 800 900; do
   place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/${w}.ttf"
 done
 
-for f in Roboto-Regular.ttf SysFont-Regular.ttf SysSans-En-Regular.ttf Roboto-Italic.ttf RobotoFlex-Regular.ttf; do
+for f in Roboto-Regular.ttf SysFont-Regular.ttf SysSans-En-Regular.ttf Roboto-Italic.ttf RobotoFlex-Regular.ttf DroidSansMono.ttf; do
   place_saga "$SAGA_MAIN" "$MODPATH/system/fonts/$f"
 done
 

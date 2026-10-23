@@ -1,7 +1,7 @@
 id=SagaFont
 name=SagaFont HyperOS
-version=1.3.0
-versionCode=1300001
+version=1.3.1
+versionCode=1300002
 author=Adapted for HyperOS
 description=基于 MFGA 模板替换主字体为沙加体的 HyperOS 全局字体模块。中英文统一显示为 SagaSans。请同时安装 DisableMiFontOverlay 1.0.6（独立模块，不整合）。Requires Magisk 28.0+ and KernelSU 11986+ Disable "Umount Module by default".
 minMagisk=28000

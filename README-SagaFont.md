@@ -12,7 +12,7 @@
 system/fonts/SagaSans.ttf
 ```
 
-安装时会硬链接为 MFGA 主字形 `100.ttf`–`900.ttf`，以及 HyperOS 常见的 `MiSans*` / `Roboto*` 文件名。`fonts.xml` 的 sans-serif / serif / 中日韩回退直接引用 `SagaSans.ttf`。
+安装时会硬链接为 MFGA 主字形 `100.ttf`–`900.ttf`，以及 HyperOS 常见的 `MiSans*` / `Roboto*` / `DroidSansMono.ttf` 文件名。`fonts.xml` 的 sans-serif / serif / monospace / 中日韩回退直接引用 `SagaSans.ttf`。
 
 ## 使用前检查（重要）
 
@@ -30,7 +30,7 @@ system/fonts/SagaSans.ttf
 
 ## 修改说明
 
-- `fonts.xml`：以 MFGA 为模板。sans-serif / serif / 中日韩回退改为 `SagaSans.ttf`。为 HyperOS 补齐 `miui` / `mipro` / `misans` / `clock` / `mitype` 别名。
-- `customize.sh`：在 MFGA 安装流程上要求存在 `SagaSans.ttf`，硬链接为 `100.ttf`–`900.ttf` 与常见 HyperOS UI 字体文件名。不扫描分区，不覆盖主题 / GMS / App 运行时字体。
+- `fonts.xml`：以 MFGA 为模板。sans-serif / serif / monospace / 中日韩回退改为 `SagaSans.ttf`。为 HyperOS 补齐 `miui` / `mipro` / `misans` / `clock` / `mitype` 别名。
+- `customize.sh`：在 MFGA 安装流程上要求存在 `SagaSans.ttf`，硬链接为 `100.ttf`–`900.ttf`、`DroidSansMono.ttf` 与常见 HyperOS UI 字体文件名。不扫描分区，不覆盖主题 / GMS / App 运行时字体。
 - `search_dirs.sh`：保留独立 `product` / `system_ext` / `vendor` / `mi_ext` / `odm` 分区的 `fonts.xml` 挂载，供 HyperOS 使用。
 - `module.prop`：HyperOS 字体模块，需配合 DisableMiFontOverlay 1.0.6。
